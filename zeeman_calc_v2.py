@@ -68,7 +68,12 @@ gg_mo      = 2 # Lande g factor ground state
 mueff1_mo  = (me1_mo*ge_mo - mg_mo*gg_mo)*muB
 mueff_1_mo = (me_1_mo*ge_mo - mg_mo*gg_mo)*muB
 
-# depends on laser intensity saturation
+# depends on laser intensity 
+I      = 1      # laser intensity
+I_sat  = 0.147      # saturation intensity
+s      = I/I_sat
+eta_eq = s/(1+s)
+
 eta_mo = .067
 
 '''Zeeman params for yb'''
