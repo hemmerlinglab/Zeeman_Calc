@@ -70,7 +70,7 @@ mueff_1_mo = (me_1_mo*ge_mo - mg_mo*gg_mo)*muB
 
 # depends on laser intensity 
 I      = 1      # laser intensity
-I_sat  = 0.147      # saturation intensity
+I_sat  = 0.147      # saturation intensity mW cm^-1
 s      = I/I_sat
 eta_eq = s/(1+s)
 
@@ -124,6 +124,7 @@ plt.ylabel('Magnetic Field (gauss)',fontsize=16)
 plt.plot(z*1e2,B_1*1e4,'b',label='m =-1')
 plt.title('yb zeeman slower',fontsize=16)
 plt.legend(fontsize=16)
+plt.tight_layout()
 
 ''' Moly plot params '''
 plt.figure()
@@ -135,7 +136,7 @@ plt.ylabel('Magnetic Field (gauss)',fontsize=16)
 plt.plot(z_mo*1e2,B_1_mo*1e4,'b',label='m =-1')
 plt.title('mo zeeman slower',fontsize=16)
 plt.legend(fontsize=16)
-
+plt.tight_layout()
 
 
 plt.show()
