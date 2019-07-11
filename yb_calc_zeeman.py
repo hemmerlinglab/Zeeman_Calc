@@ -30,32 +30,40 @@ a_max  = hbar*k*gamma/(2*M)
 
 # double check the me number 
 
-me     = 1 # magnetic quantum number excited state
-mg     = 0 # magnetic quantum number ground state
-ge     = 1 # Lande g factor excited state
-gg     = 0 # Lande g factor ground state
-mueff   = (me*ge - mg*gg)/muB
-
+me1     = 1 # magnetic quantum number excited state
+me_1    = -1
+me0     = 0
+mg      = 0 # magnetic quantum number ground state
+ge      = 1 # Lande g factor excited state
+gg      = 0 # Lande g factor ground state
+mueff1  = (me1*ge - mg*gg)/muB
+mueff_1 = (me_1*ge - mg*gg)/muB
 
 '''Zeeman params'''
-B0 = hbar*k*v0/(mueff) #initial B field
-L0 = v0**(2)/a_max     # stopping distance
+B01  = hbar*k*v0/(mueff1) #initial B field
+B0_1 = hbar*k*v0/(mueff_1) #initial B field
+
+#B00 = hbar*k*v0/(mueff0) #initial B field
+L0      = v0**(2)/a_max     # stopping distance
 start_z = 0
 end_z   = 15
 steps   = 50
 z       = np.linspace(start_z,end_z,steps)
-B       = B0*(1+z/L0)**(1/2)
+B1      = B01*(1+z/L0)**(1/2)
+B_1     = B0_1*(1+z/L0)**(1/2)
 
 print('params:')
 print('L0: '    + str(L0)) 
-print('B0: '    + str(B0))
+print('B01: '    + str(B01))
+print('B0_1: '   + str(B0_1))
 print('a_max: ' + str(a_max)) 
-print('hbar ' + str(hbar))
-print('k    ' + str(k))
 
-plt.plot(z,B)
+plt.plot(z,B1,'m',label='m=1')
 plt.tick_params(labelsize=16) #tick size
 plt.tick_params(direction='in') #tick direction
-plt.xlabel('z',fontsize=16)
-plt.ylabel('B',fontsize=16)
+plt.xlabel('z (meters)',fontsize=16)
+plt.ylabel('Magnetic Field (T)',fontsize=16)
+plt.plot(z,B_1,'b',label='m =-1')
+plt.legend(fontsize=16)
+
 plt.show()
