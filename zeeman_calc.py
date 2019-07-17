@@ -74,7 +74,7 @@ I_sat  = 0.147      # saturation intensity mW cm^-1
 s      = I/I_sat
 eta_eq = s/(1+s)
 
-eta_mo = .067
+eta_mo = 0.067
 
 '''Zeeman params for yb'''
 B01  = hbar*k*v0/(mueff1)  #initial B field for m = 1
