@@ -1,4 +1,4 @@
-'''Fixed Lande g factors'''
+'''Page 183 in the Foot book'''
 
 
 
@@ -26,14 +26,14 @@ hbar   = h/(2*np.pi)
 '''Yb Variables'''
 
 M      = 173*1.66054*10**(-27) # mass in kg
-v0     = 150   # m/s
+v0     = 100   # m/s
 lbda   = 398.9*10**(-9) # meters
 gamma  = 28*10**(6)*2*np.pi # decay rate Yb
 k      = 2*np.pi/(lbda)
 a_max  = hbar*k*gamma/(2*M)
 
 
-eta = .067
+eta = .67
 
 # Quantum numbers stuff
 
@@ -74,7 +74,7 @@ I_sat  = 0.147      # saturation intensity mW cm^-1
 s      = I/I_sat
 eta_eq = s/(1+s)
 
-eta_mo = 0.067
+eta_mo = 0.67
 
 '''Zeeman params for yb'''
 B01  = hbar*k*v0/(mueff1)  #initial B field for m = 1
