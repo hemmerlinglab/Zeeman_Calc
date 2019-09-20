@@ -8,7 +8,7 @@ L = .75*25.4e-3 # m
 nmags = 10
 B0 = 268 # Gs
 L0 = .3 # m
-
+switch_point = 5 # from stacked to unstacked
 ys = np.linspace(0,L0,nmags+1)[:-1] # m
 
 sols = []
@@ -16,7 +16,7 @@ ni = len(ys)
 
 for i in range(ni):
 	def Zeeman(z):
-		if i < 5:
+		if i < switch_point:
 			return M*(z/np.sqrt(z**2+R**2)-(z-L)/np.sqrt((z-L)**2+R**2))-B0*(1-ys[i]/L0)
 		else:
 			return M/2*(z/np.sqrt(z**2+R**2)-(z-L)/np.sqrt((z-L)**2+R**2))-B0*(1-ys[i]/L0)
@@ -33,7 +33,7 @@ print('Total Slower Length: {} cm'.format((nmags*L0/(nmags+1)+2*R)*100))
 for j in range(len(sols)):
 	if j == 0:
 		print('- 2 Magnets on Each Side')
-	elif j == 5:
+	elif j == switch_point:
 		print('- 1 Magnet on Each Side')
 	print('Magnet {}: {} cm'.format(j+1,sols[j]*100))
 print('Simulation Successful: {}'.format(np.min(sols)*100>rmin))
