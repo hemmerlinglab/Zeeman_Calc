@@ -1,7 +1,7 @@
 # Zeeman_Calc
 Code for calculation involved in building a Zeeman slower.
 ## zeeman_calc.py
-Programmed by Kayla, based on paper (Kayla add more)
+Programmed by Kayla, based on page 183 from Foot Atomic Physics. This code calculates the required magnetic field profile to slow yb and mo atoms and then plots the results
 ## zeeman_slower_v2.py
 ### Intro
 Programmed by John.  Using the fit function that was used in the Magnet_Measurement repository and the values obtained therein, the scipy.optimize.fsolve function was used to optimize the expected positions for the magnets.
