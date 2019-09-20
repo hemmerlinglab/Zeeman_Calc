@@ -27,6 +27,7 @@ for i in range(ni):
 	print('[{}{}] {}'.format('|'*n,' '*(100-n),100*(i+1)/ni),end='\r')
 print(' '*120)
 rmin = 2.5*2.54/2
+print('Minimum spacing: {} cm'.format(2*R*100))
 print('Magnet spacing: {} cm'.format(L0*100/(nmags+1)))
 print('Minimum radius: {} cm'.format(rmin))
 print('Total Slower Length: {} cm'.format((nmags*L0/(nmags+1)+2*R)*100))
