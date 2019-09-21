@@ -1,6 +1,7 @@
 import scipy
 import numpy as np
 from scipy.optimize import fsolve
+import time
 
 M = 4*6335 # uo*M/2
 R = .25*25.4e-3 # m
@@ -23,8 +24,9 @@ for i in range(ni):
 	test = [.03]
 	roots = fsolve(Zeeman,test)
 	sols.append(roots[0]-L)
-	n = (100*(i+1)//ni)
-	print('[{}{}] {}'.format('|'*n,' '*(100-n),100*(i+1)/ni),end='\r')
+	n = (80*(i+1)//ni)
+	print('[{}{}] {}%'.format('|'*n,' '*(80-n),100*(i+1)//ni),end='\r')
+	time.sleep(.1)
 print(' '*125)
 rmin = 2.5*2.54/2
 smin = 2*R*100
@@ -40,5 +42,5 @@ for j in range(len(sols)):
 		print('\n- 2 Magnets on Each Side')
 	elif j == switch_point:
 		print('- 1 Magnet on Each Side')
-	print('Magnet {}: {} cm'.format(j+1,sols[j]*100))
+	print('Magnet {} ({}): {} cm'.format(j+1,ys[j]*100/2.54,sols[j]*100))
 print('\nSimulation Successful: {}'.format(np.min(sols)*100>rmin and spacing>smin))
