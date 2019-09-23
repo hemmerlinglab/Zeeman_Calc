@@ -26,7 +26,7 @@ hbar   = h/(2*np.pi)
 '''Yb Variables'''
 
 M      = 173*1.66054*10**(-27) # mass in kg
-v0     = 100   # m/s
+v0     = 200   # m/s
 lbda   = 398.9*10**(-9) # meters
 gamma  = 28*10**(6)*2*np.pi # decay rate Yb
 k      = 2*np.pi/(lbda)
@@ -51,7 +51,7 @@ mueff_1 = (me_1*ge - mg*gg)*muB
 ''' Mo Variables '''
 
 M_mo     = 100*1.66054*10**(-27) # mass in kg
-v0_mo    = 150   # m/s
+v0_mo    = 200   # m/s
 lbda_mo  = 390.9*10**(-9) # meters
 gamma_mo = 11*10**(6)*2*np.pi # decay rate Mo
 k_mo     = 2*np.pi/(lbda_mo)
@@ -69,18 +69,18 @@ mueff1_mo  = (me1_mo*ge_mo - mg_mo*gg_mo)*muB
 mueff_1_mo = (me_1_mo*ge_mo - mg_mo*gg_mo)*muB
 
 # depends on laser intensity 
-I      = 1      # laser intensity
-I_sat  = 0.147      # saturation intensity mW cm^-1
+I      = 1       # laser intensity
+I_sat  = 0.147   # saturation intensity mW cm^-1
 s      = I/I_sat
 eta_eq = s/(1+s)
 
-eta_mo = 0.67
+eta_mo = .67
 
 '''Zeeman params for yb'''
 B01  = hbar*k*v0/(mueff1)  #initial B field for m = 1
 B0_1 = hbar*k*v0/(mueff_1) #initial B field for m = -1
 
-L0      = v0**(2)/(2*eta*a_max)     # stopping distance
+L0      = v0**(2)/(a_max)     # stopping distance
 start_z = 0
 end_z   = L0
 steps   = 200
@@ -99,7 +99,7 @@ print('a_max: ' + str(a_max))
 B01_mo  = hbar*k_mo*v0_mo/(mueff1_mo)  #initial B field for m = 1
 B0_1_mo = hbar*k_mo*v0_mo/(mueff_1_mo) #initial B field for m = -1
 
-L0_mo      = v0_mo**(2)/(2*eta_mo*a_max_mo)     # stopping distance
+L0_mo      = v0_mo**(2)/(a_max_mo)     # stopping distance
 start_z_mo = 0
 end_z_mo   = L0_mo
 steps_mo   = 200
