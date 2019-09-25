@@ -1,4 +1,4 @@
-'''Page 183 in the Foot book'''
+'''Page 183 in the Foot book for equations'''
 
 
 
@@ -25,7 +25,7 @@ hbar   = h/(2*np.pi)
 
 '''Yb Variables'''
 
-M      = 173*1.66054*10**(-27) # mass in kg
+M      = 174*1.66054*10**(-27) # mass in kg
 v0     = 200   # m/s
 lbda   = 398.9*10**(-9) # meters
 gamma  = 28*10**(6)*2*np.pi # decay rate Yb
@@ -74,13 +74,13 @@ I_sat  = 0.147   # saturation intensity mW cm^-1
 s      = I/I_sat
 eta_eq = s/(1+s)
 
-eta_mo = .67
+eta_mo = 0.67
 
 '''Zeeman params for yb'''
 B01  = hbar*k*v0/(mueff1)  #initial B field for m = 1
 B0_1 = hbar*k*v0/(mueff_1) #initial B field for m = -1
 
-L0      = v0**(2)/(a_max)     # stopping distance
+L0      = v0**(2)/(a_max*eta)     # stopping distance
 start_z = 0
 end_z   = L0
 steps   = 200
@@ -90,7 +90,7 @@ B_1     = B0_1*(1-z/L0)**(1/2)
 
 
 print('params for yb:')
-print('L0: '    + str(L0)) 
+print('L0: '    + str(L0*1e2) + str(' cm') )
 print('B01: gauss '    + str(B01*1e4))
 print('B0_1: gauss '   + str(B0_1*1e4))
 print('a_max: ' + str(a_max)) 
@@ -99,7 +99,7 @@ print('a_max: ' + str(a_max))
 B01_mo  = hbar*k_mo*v0_mo/(mueff1_mo)  #initial B field for m = 1
 B0_1_mo = hbar*k_mo*v0_mo/(mueff_1_mo) #initial B field for m = -1
 
-L0_mo      = v0_mo**(2)/(a_max_mo)     # stopping distance
+L0_mo      = v0_mo**(2)/(a_max_mo*eta_mo)     # stopping distance
 start_z_mo = 0
 end_z_mo   = L0_mo
 steps_mo   = 200
@@ -109,7 +109,7 @@ B_1_mo     = B0_1_mo*(1-z_mo/L0_mo)**(1/2)
 
 
 print('params for mo:')
-print('L0_mo: '    + str(L0_mo)) 
+print('L0_mo: '    + str(L0_mo*1e2)+str(' cm')) 
 print('B01_mo: gauss '    + str(B01_mo*1e4))
 print('B0_1_mo: gauss '   + str(B0_1_mo*1e4))
 print('a_max_mo: ' + str(a_max_mo)) 
