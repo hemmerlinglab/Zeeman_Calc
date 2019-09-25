@@ -10,9 +10,9 @@ import time
 M = 4*6335 # uo*M/2
 R = .25*25.4e-3 # radius of magnet in meters
 L = .75*25.4e-3 # length of magnet in meters
-nmags = 13 # number of positions of magnets along the beamline
+nmags = 8 # number of positions of magnets along the beamline
 B0 = 268 # Gs
-L0 = .3 # stopping distance- obtained from zeeman.py
+L0 = .118 # stopping distance- obtained from zeeman.py
 switch_point = 6 # from stacked to unstacked, index in the array which you swtich from being stacked to not stacked
 ys = np.linspace(0,L0,nmags+1)[:-1] # ensures L0 is not included in the ys
 
