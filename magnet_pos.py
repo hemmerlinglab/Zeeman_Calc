@@ -13,7 +13,7 @@ L = .75*25.4e-3 # length of magnet in meters
 nmags = 8 # number of positions of magnets along the beamline
 B0 = 268 # Gs
 L0 = .118 # stopping distance- obtained from zeeman.py
-switch_point = 6 # from stacked to unstacked, index in the array which you swtich from being stacked to not stacked
+switch_point = 4 # from stacked to unstacked, index in the array which you swtich from being stacked to not stacked
 ys = np.linspace(0,L0,nmags+1)[:-1] # ensures L0 is not included in the ys
 
 sols = [] # solution array
@@ -49,10 +49,11 @@ print('Minimum spacing: {} cm'.format(smin))
 print('Magnet spacing: {} cm'.format(spacing))
 print('Minimum radius: {} cm'.format(rmin))
 print('Total Slower Length: {} cm'.format((nmags*L0/(nmags+1)+2*R)*100)) #min size of mechanical thing
+
 for j in range(len(sols)):
 	if j == 0:
 		print('\n- 2 Magnets on Each Side')
 	elif j == switch_point:
 		print('- 1 Magnet on Each Side')
-	print('Magnet {} ({}): {} cm'.format(j+1,ys[j]*100/2.54,sols[j]*100))
+	print('Magnet {} ({} in): {} cm'.format(j+1,ys[j]*100/2.54,sols[j]*100))
 print('\nSimulation Successful: {}'.format(np.min(sols)*100>rmin and spacing>smin))
