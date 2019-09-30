@@ -14,7 +14,9 @@ nmags = 8 # number of positions of magnets along the beamline
 B0 = 268 # Gs
 L0 = .118 # stopping distance- obtained from zeeman.py
 switch_point = 4 # from stacked to unstacked, index in the array which you swtich from being stacked to not stacked
-ys = np.linspace(0,L0,nmags+1)[:-1] # ensures L0 is not included in the ys
+#ys = np.linspace(0,L0,nmags+1)[:-1] # ensures L0 is not included in the ys 
+
+ys = np.arange(0,8)*.58*2.54e-2
 
 sols = [] # solution array
 ni = len(ys) # number of points , len of y
@@ -55,5 +57,5 @@ for j in range(len(sols)):
 		print('\n- 2 Magnets on Each Side')
 	elif j == switch_point:
 		print('- 1 Magnet on Each Side')
-	print('Magnet {} ({} in): {} cm'.format(j+1,ys[j]*100/2.54,sols[j]*100))
+	print('Magnet {} ({} in): {} in'.format(j+1,ys[j]*100/2.54,(sols[j]*100-rmin)/2.54-.05))
 print('\nSimulation Successful: {}'.format(np.min(sols)*100>rmin and spacing>smin))
