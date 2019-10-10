@@ -26,7 +26,7 @@ hbar   = h/(2*np.pi)
 '''Yb Variables'''
 
 M      = 174*1.66054*10**(-27) # mass in kg
-v0     = 200   # m/s
+v0     = 300   # m/s
 lbda   = 398.9*10**(-9) # meters
 gamma  = 28*10**(6)*2*np.pi # decay rate Yb
 k      = 2*np.pi/(lbda)

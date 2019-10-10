@@ -26,9 +26,9 @@ for i in range(ni):
 	def Zeeman(z):
 		if i < switch_point:
 			# cylindrical magnet equation has to be equal to the required zeeman profile
-			return M*(z/np.sqrt(z**2+R**2)-(z-L)/np.sqrt((z-L)**2+R**2))-B0*(1-ys[i]/L0)
+			return M*(z/np.sqrt(z**2+R**2)-(z-L)/np.sqrt((z-L)**2+R**2))-B0*(1-ys[i]/L0)**(1/2)
 		else:
-			return M/2*(z/np.sqrt(z**2+R**2)-(z-L)/np.sqrt((z-L)**2+R**2))-B0*(1-ys[i]/L0)
+			return M/2*(z/np.sqrt(z**2+R**2)-(z-L)/np.sqrt((z-L)**2+R**2))-B0*(1-ys[i]/L0)**(1/2)
 	test = [.03] # start looking here for a fit
 	roots = fsolve(Zeeman,test) # function for finding roots
 	sols.append(roots[0]-L) # append the solution, solve for roots, subtract length of magnet
