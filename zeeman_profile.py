@@ -58,8 +58,33 @@ def calc_B0(opts):
 	gJ_e = gJ(opts['S_e'], opts['L_e'], opts['J_e'])
 
 	return hbar*k*v0/((mJ_e*gJ_e - mJ_g*gJ_g)*muB)
+	
+def plot_zeeman(opts):
+	
+	B0 = calc_B0(opts)
+	L0 = calc_L0(opts)
 
+	start_z = 0
+	end_z   = L0
+	steps   = 200
+	z       = np.linspace(start_z,end_z,steps)
 
+	Bfield = B0 * np.sqrt(1-z/L0)
+	
+	plt.figure()
+	plt.plot(z*1e2,Bfield*1e4,'k')
+
+	plt.tick_params(labelsize=16) #tick size
+	plt.tick_params(direction='in') #tick direction
+
+	plt.xlabel('z (cm)',fontsize=16)
+	plt.ylabel('Magnetic Field (gauss)',fontsize=16)
+	
+	plt.title(opts['name'] + ' Zeeman Slower - ' +  str(opts['v0']) + 'm/s', fontsize=16)	
+
+	plt.text(0,0, 'B0 = ' + str(round(B0*1e4)) + ' Gs; L0 = ' + str(round(L0*1e2)) + ' cm')
+
+	plt.tight_layout()
 
 
 
@@ -99,32 +124,6 @@ mo_opts = {
 
 
 
-def plot_zeeman(opts):
-	
-	B0 = calc_B0(opts)
-	L0 = calc_L0(opts)
-
-	start_z = 0
-	end_z   = L0
-	steps   = 200
-	z       = np.linspace(start_z,end_z,steps)
-
-	Bfield = B0 * np.sqrt(1-z/L0)
-	
-	plt.figure()
-	plt.plot(z*1e2,Bfield*1e4,'k')
-
-	plt.tick_params(labelsize=16) #tick size
-	plt.tick_params(direction='in') #tick direction
-
-	plt.xlabel('z (cm)',fontsize=16)
-	plt.ylabel('Magnetic Field (gauss)',fontsize=16)
-	
-	plt.title(opts['name'] + ' Zeeman Slower - ' +  str(opts['v0']) + 'm/s', fontsize=16)	
-
-	plt.text(0,0, 'B0 = ' + str(round(B0*1e4)) + ' Gs; L0 = ' + str(round(L0*1e2)) + ' cm')
-
-	plt.tight_layout()
 
 
 plot_zeeman(yb_opts)
