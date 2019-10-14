@@ -58,7 +58,7 @@ def calc_B0(opts):
 	gJ_e = gJ(opts['S_e'], opts['L_e'], opts['J_e'])
 
 	return hbar*k*v0/((mJ_e*gJ_e - mJ_g*gJ_g)*muB)
-	
+
 def plot_zeeman(opts):
 	
 	B0 = calc_B0(opts)
@@ -80,7 +80,7 @@ def plot_zeeman(opts):
 	plt.xlabel('z (cm)',fontsize=16)
 	plt.ylabel('Magnetic Field (gauss)',fontsize=16)
 	
-	plt.title(opts['name'] + ' Zeeman Slower - ' +  str(opts['v0']) + 'm/s', fontsize=16)	
+	plt.title(opts['name'] + ' Zeeman Slower - max velocity: ' +  str(opts['v0']) + 'm/s', fontsize=16)	
 
 	plt.text(0,0, 'B0 = ' + str(round(B0*1e4)) + ' Gs; L0 = ' + str(round(L0*1e2)) + ' cm')
 
@@ -123,11 +123,28 @@ mo_opts = {
 	}
 
 
+na_opts = {
+	'name' : 'Na',
+	'mass' : 23*amu,
+	'v0' : 1000,
+	'lambda' : 589e-9,
+	'gamma' : 6.16e7,
+	'S_g' : 1.0/2.0,
+	'L_g' : 0,
+	'J_g' : 1.0/2.0,
+	'S_e' : 1.0/2.0,
+	'L_e' : 1.0,
+	'J_e' : 3.0/2.0,
+	'eta' : 1.0
+	}
+
 
 
 
 plot_zeeman(yb_opts)
 
 plot_zeeman(mo_opts)
+
+plot_zeeman(na_opts)
 
 plt.show()
