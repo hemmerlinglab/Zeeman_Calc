@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 import magpylib as magpy
 import time
 
-M = 6335/(2*1.26) # magnetization (mT)
+M = 6335/(4*1.26) # magnetization (mT)
 D = .5*25.4 # diameter (mm)
 L = .75*25.4 # length (mm)
 xo = .25*25.4 # x offset (mm)
