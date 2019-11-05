@@ -3,6 +3,8 @@ from matplotlib import pyplot as plt
 import magpylib as magpy
 import time
 
+# MAGNETIZATION WAS WRONG BY A FACTOR OF 2 AND POSITION OFFSETS WERE WRONG AS WELL!!!
+
 M = 6335/(4*1.26) # magnetization (mT)
 D = .5*25.4 # diameter (mm)
 L = .75*25.4 # length (mm)
