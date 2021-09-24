@@ -11,7 +11,7 @@ def Cylmag(loc,ori,d=D,l=L,m=M):
 
 ylocs = np.arange(0,11)*25.4 # mm, beam line locations
 zoffset = (2.5/2+.375)*25.4 # mm, radius of nipple plus half the magnet
-zlocs = [0,0,0,0,0,0,0,0,0,0,0] # mm, radial distances
+zlocs = [0,3,8,11,17,30,45,60,40,25,5] # mm, radial distances
 xoffset = .25*25.4 # mm, magnet radius for double stacked
 oris = [1,1,1,1,1,1,1,1,-1,-1,-1]
 
@@ -33,7 +33,7 @@ for sc in sources:
 	C.addSources(sources[sc])
 
 
-ymin = -1*25.4 # mm
+ymin = 0 # mm
 ymax = 11*25.4 # mm
 ny = 100
 ys = np.linspace(ymin,ymax,ny)
@@ -41,30 +41,34 @@ Y = [[0,y,0] for y in ys]
 BZy = C.getBsweep(Y) # mT
 
 plt.figure()
-plt.plot(ys/25.4,BZy[:,2]*10)
-plt.xlabel('Beamline Position (in)')
+plt.plot(ys/10,BZy[:,2]*10)
+plt.xlabel('Beamline Position (cm)')
 plt.ylabel('Z Magnetic Field (Gs)')
 plt.title('Beamline Z Magnetic Field')
+plt.axhline(0,color='g')
+B0 = 537 # Gs
+L0 = 26.6 # cm
+Bg = B0/2 # Gs
+calc = B0*(1-ys/(L0*10))**(1/2) - Bg
+plt.plot(ys/10,calc,color='r',linestyle='--')
 
+#zmin = -100 # mm
+#zmax = 100 # mm
+#nz = 100
+#zs = np.linspace(zmin,zmax,nz)
+#Z = [[0,0,z] for z in zs]
+#BZz = C.getBsweep(Z) # mT
 
-zmin = -100 # mm
-zmax = 100 # mm
-nz = 100
-zs = np.linspace(zmin,zmax,nz)
-Z = [[0,0,z] for z in zs]
-BZz = C.getBsweep(Z) # mT
+#plt.figure()
+#plt.plot(zs/25.4,BZz[:,2]*10)
+#plt.axvline(zoffset/25.4+.375)
+#plt.axvline(zoffset/25.4-.375)
+#plt.axvline(-zoffset/25.4+.375)
+#plt.axvline(-zoffset/25.4-.375)
+#plt.xlabel('Z Position (in)')
+#plt.ylabel('Z Magnetic Field (Gs)')
+#plt.title('Cross Beam Z Magnetic Field')
 
-plt.figure()
-plt.plot(zs/25.4,BZz[:,2]*10)
-plt.axvline(zoffset/25.4+.375)
-plt.axvline(zoffset/25.4-.375)
-plt.axvline(-zoffset/25.4+.375)
-plt.axvline(-zoffset/25.4-.375)
-plt.xlabel('Z Position (in)')
-plt.ylabel('Z Magnetic Field (Gs)')
-plt.title('Cross Beam Z Magnetic Field')
-
-
-C.displaySystem()
+#C.displaySystem()
 
 plt.show()
