@@ -2,6 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import magpylib as magpy
 import time
+from scipy.spatial.transform import Rotation as R
 
 # MAGNETIZATION WAS WRONG BY A FACTOR OF 2 AND POSITION OFFSETS WERE WRONG AS WELL!!!
 
@@ -10,68 +11,68 @@ D = .5*25.4 # diameter (mm)
 L = .75*25.4 # length (mm)
 xo = .25*25.4 # x offset (mm)
 yo = 1*25.4 # y offset (mm)
-zo = (2.5/2)*25.4
-d1 = .19
-d2 = .35
-d3 = .38
-d4 = .44
-d5 = .53
-d6 = .7
+zo = (2.5/2)*25.4 # mm
+d1 = .19 # in
+d2 = .35 # in
+d3 = .38 # in
+d4 = .44 # in
+d5 = .53 # in
+d6 = .7 # in
 
-d7 = 1.15
-d8 = 1.5
-d9 = 1.55
+d7 = 1.15 # in
+d8 = 1.5 # in
+d9 = 1.55 # in
 
-d10 = 1.25
-d11 = 1.65
+d10 = 1.25 # in
+d11 = 1.65 # in
 
 print('Initializing sources...')
-s11 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,0,-d1*25.4-zo])
-#s12 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,0,-d1*25.4-zo])
-s13 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,0,+d1*25.4+zo])
-#s14 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,0,+d1*25.4+zo])
+s11 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,0,-d1*25.4-zo])
+#s12 = magpy.source.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,0,-d1*25.4-zo])
+s13 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,0,+d1*25.4+zo])
+#s14 = magpy.source.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,0,+d1*25.4+zo])
 
-s21 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,1*yo,-d2*25.4-zo])
-#s22 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,1*yo,-d2*25.4-zo])
-s23 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,1*yo,+d2*25.4+zo])
-#s24 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,1*yo,+d2*25.4+zo])
+s21 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,1*yo,-d2*25.4-zo])
+#s22 = magpy.source.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,1*yo,-d2*25.4-zo])
+s23 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,1*yo,+d2*25.4+zo])
+#s24 = magpy.source.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,1*yo,+d2*25.4+zo])
 
-s31 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,2*yo,-d3*25.4-zo])
-#s32 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,2*yo,-d3*25.4-zo])
-s33 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,2*yo,+d3*25.4+zo])
-#s34 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,2*yo,+d3*25.4+zo])
+s31 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,2*yo,-d3*25.4-zo])
+#s32 = magpy.source.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,2*yo,-d3*25.4-zo])
+s33 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,2*yo,+d3*25.4+zo])
+#s34 = magpy.source.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,2*yo,+d3*25.4+zo])
 
-s41 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,3*yo,-d4*25.4-zo])
-#s42 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,3*yo,-d4*25.4-zo])
-s43 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,3*yo,+d4*25.4+zo])
-#s44 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,3*yo,+d4*25.4+zo])
+s41 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,3*yo,-d4*25.4-zo])
+#s42 = magpy.source.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,3*yo,-d4*25.4-zo])
+s43 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,3*yo,+d4*25.4+zo])
+#s44 = magpy.source.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,3*yo,+d4*25.4+zo])
 
-s51 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,4*yo,-d5*25.4-zo])
-s53 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,4*yo,+d5*25.4+zo])
+s51 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,4*yo,-d5*25.4-zo])
+s53 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,4*yo,+d5*25.4+zo])
 
-s61 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,5*yo,-d6*25.4-zo])
-s63 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,5*yo,+d6*25.4+zo])
+s61 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,5*yo,-d6*25.4-zo])
+s63 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,5*yo,+d6*25.4+zo])
 
-s71 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[-xo,6*yo,-d7*25.4-zo])
-s72 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,6*yo,-d7*25.4-zo])
-s73 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[-xo,6*yo,+d7*25.4+zo])
-s74 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,6*yo,+d7*25.4+zo])
+s71 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[-xo,6*yo,-d7*25.4-zo])
+s72 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,6*yo,-d7*25.4-zo])
+s73 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[-xo,6*yo,+d7*25.4+zo])
+s74 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,6*yo,+d7*25.4+zo])
 
-s81 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[-xo,7*yo,-d8*25.4-zo])
-s82 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,7*yo,-d8*25.4-zo])
-s83 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[-xo,7*yo,+d8*25.4+zo])
-s84 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,7*yo,+d8*25.4+zo])
+s81 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[-xo,7*yo,-d8*25.4-zo])
+s82 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,7*yo,-d8*25.4-zo])
+s83 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[-xo,7*yo,+d8*25.4+zo])
+s84 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,7*yo,+d8*25.4+zo])
 
-s91 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[-xo,8*yo,-d9*25.4-zo])
-s92 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,8*yo,-d9*25.4-zo])
-s93 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[-xo,8*yo,+d9*25.4+zo])
-s94 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[xo,8*yo,+d9*25.4+zo])
+s91 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[-xo,8*yo,-d9*25.4-zo])
+s92 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,8*yo,-d9*25.4-zo])
+s93 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[-xo,8*yo,+d9*25.4+zo])
+s94 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[xo,8*yo,+d9*25.4+zo])
 
-s101 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,9*yo,-d10*25.4-zo])
-s103 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,9*yo,+d10*25.4+zo])
+s101 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,9*yo,-d10*25.4-zo])
+s103 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,9*yo,+d10*25.4+zo])
 
-s111 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,10*yo,-d11*25.4-zo])
-s113 = magpy.source.magnet.Cylinder(mag=[0,0,M],dim=[D,L],pos=[0,10*yo,+d11*25.4+zo])
+s111 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,10*yo,-d11*25.4-zo])
+s113 = magpy.magnet.Cylinder(magnetization=[0,0,M],dimension=[D,L],position=[0,10*yo,+d11*25.4+zo])
 
 time.sleep(1)
 
@@ -122,8 +123,10 @@ cz = magpy.Collection(s11,
 					  s111,
 					  s113)
 
-ymin = 0
-ymax = 11*yo
+cz.rotate(R.from_euler('y',90,degrees=True),anchor=0)
+
+ymin = -yo #0
+ymax = 12*yo
 nys = 100
 
 Y = [[0,y,0] for y in np.linspace(ymin,ymax,nys)]
@@ -132,18 +135,18 @@ time.sleep(1)
 
 print('Calculating field...')
 
-BYZ = cz.getBsweep(Y)
+BYZ = cz.getB(Y)
 
 time.sleep(1)
 
 print('Preparing plots...')
 ys = np.linspace(ymin,ymax,nys)
 plt.figure()
-plt.plot(ys/10,BYZ[:,2]*10)
+plt.plot(ys/10,BYZ[:,0]*10)
 
 B0 = 537 # Gs
 L0 = 26.6 # cm
-calc = B0*(1-ys/(L0*10))**(1/2)
+calc = B0/2*(1-ys/(L0*10))**(1/2)
 plt.plot(ys/10,calc,color='r',linestyle='--')
 
 
@@ -169,15 +172,15 @@ plt.ylabel('Magnetic Field (Gs)')
 
 
 plt.figure(figsize=(8,8))
-zs = np.linspace(-5*25.4,5*25.4,100)
-Btot = np.array([[cz.getB([0,y,z]) for y in ys] for z in zs])
-Ym,Zm = np.meshgrid(ys,zs)
-U,V = Btot[:,:,1], Btot[:,:,2]
-plt.pcolor(ys,zs,np.log(U**2+V**2))
-plt.streamplot(Ym,Zm,U,V,color='w',density=2)
+xs = np.linspace(-5*25.4,5*25.4,100)
+Btot = np.array([[cz.getB([x,y,0]) for x in xs] for y in ys])
+Xm,Ym = np.meshgrid(xs,ys)
+U,V = Btot[:,:,0], Btot[:,:,1]
+plt.pcolor(xs,ys,np.log(U**2+V**2))
+plt.streamplot(Xm,Ym,U,V,color='w',density=2)
 plt.margins(0,0)
 
-cz.displaySystem()
+magpy.show(cz)
 
 print('FINISHED')
 plt.show()
